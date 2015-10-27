@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/rstoenescu/gulp-pipes#readme",
   "dependencies": {
+    "eslint-config-defaults": "^7.0.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
@@ -47,6 +48,7 @@
     "codecov.io": "^0.1.6",
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.0",
+    "mocha": "^2.3.3",
     "stream-array": "^1.1.1",
     "stream-assert": "^2.0.3"
   }
