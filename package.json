@@ -4,7 +4,7 @@
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "scripts": {
-    "test": "./npm-test.sh",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -r test/setup.js test/**/*.spec.js",
     "coverage": "google-chrome ./coverage/lcov-report/index.html"
   },
   "repository": {
