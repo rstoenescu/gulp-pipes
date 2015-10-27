@@ -1,0 +1,51 @@
+{
+  "name": "gulp-pipes",
+  "version": "0.0.1",
+  "description": "Opinionated reusable Gulp pipes",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./npm-test.sh",
+    "coverage": "google-chrome ./coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstoenescu/gulp-pipes.git"
+  },
+  "keywords": [
+    "gulp",
+    "pipe"
+  ],
+  "author": "Razvan Stoenescu <razvan.stoenescu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rstoenescu/gulp-pipes/issues"
+  },
+  "homepage": "https://github.com/rstoenescu/gulp-pipes#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-html5-lint": "^1.0.1",
+    "gulp-htmlmin": "^1.2.0",
+    "gulp-if": "^2.0.0",
+    "gulp-load-plugins": "^1.0.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylint": "^3.0.0",
+    "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-watch": "^4.3.5",
+    "lazypipe": "^1.0.1",
+    "merge": "^1.2.0",
+    "nib": "^1.1.0",
+    "vinyl-named": "^1.1.0",
+    "vinyl-named-with-path": "^1.0.0",
+    "webpack-stream": "^2.1.1"
+  },
+  "devDependencies": {
+    "gulp-util": "^3.0.7",
+    "stream-array": "^1.1.1",
+    "stream-assert": "^2.0.3"
+  }
+}
