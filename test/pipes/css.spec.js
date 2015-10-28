@@ -104,6 +104,22 @@ describe('CSS', function() {
         .pipe(assert.end(done));
     });
 
+    it('should be able to prod-compile with specific name', function(done) {
+      fileStream(cssFile)
+        .pipe(pipes.css.deps({
+          prod: true,
+          name: 'test'
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var compiled = 'body{background-color:#fff}';
+
+          expect(d.contents.toString()).to.equal(compiled);
+          expect(path.basename(d.path)).to.equal('test.css');
+        }))
+        .pipe(assert.end(done));
+    });
+
     it('should be able to prod-compile and change extension to .min.css', function(done) {
       fileStream(cssFile)
         .pipe(pipes.css.deps({
