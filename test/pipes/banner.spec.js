@@ -49,13 +49,13 @@ describe('Banner', function() {
       .pipe(pipes.banner({
         variables: {
           pkg: {
-            name: 'Package Name',
-            author: 'Author Name',
-            version: '5.5.5',
-            license: 'RLIC',
-            homepage: 'http://quasar-framework.org'
+            name: 'pkgname',
+            author: 'somename',
+            version: '1.2.3',
+            license: 'CIL',
+            homepage: 'http://site.com'
           },
-          year: '1986'
+          year: '6891'
         },
         /*eslint-disable */
         templatePath: path.join(__dirname, '../../src/assets/banner.tpl')
@@ -65,7 +65,7 @@ describe('Banner', function() {
       .pipe(assert.first(function(d) {
         var content = d.contents.toString();
 
-        expect(content).to.equal('/* Package Name v5.5.5\n * http://quasar-framework.org RLIC license\n * (c) 1986 Author Name\n */\n' + file);
+        expect(content).to.equal('/* pkgname v1.2.3\n * http://site.com CIL license\n * (c) 6891 somename\n */\n' + file);
       }))
       .pipe(assert.end(done));
   });
@@ -81,10 +81,10 @@ describe('Banner', function() {
       .pipe(assert.first(function(d) {
         var content = d.contents.toString();
 
-        expect(content).to.contain(file);
-        expect(content).to.contain('v' + pkg.version + '\n');
         expect(content).to.contain(' * (c) ');
+        expect(content).to.contain(file);
         expect(content).to.contain(' ' + (pkg.author.name || pkg.author) + '\n');
+        expect(content).to.contain('v' + pkg.version + '\n');
       }))
       .pipe(assert.end(done));
   });

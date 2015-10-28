@@ -42,14 +42,11 @@
     "gulp-stylint": "^3.0.0",
     "gulp-stylus": "^2.1.0",
     "gulp-uglify": "^1.4.2",
-    "gulp-watch": "^4.3.5",
     "lazypipe": "^1.0.1",
-    "lodash": "^3.10.1",
     "merge": "^1.2.0",
     "nib": "^1.1.0",
     "path": "^0.12.7",
     "vinyl-named": "^1.1.0",
-    "vinyl-named-with-path": "^1.0.0",
     "webpack-stream": "^2.1.1"
   },
   "devDependencies": {
