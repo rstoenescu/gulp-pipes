@@ -14,9 +14,7 @@ var defaultWebpack = {
 };
 
 module.exports.lint = function() {
-  return common.lazypipe()
-    .pipe(common.gulp.eslint)
-    .pipe(common.gulp.eslint.format)();
+  return require('../generators/lint')(common, common.gulp.eslint, common.gulp.eslint.format);
 };
 
 module.exports.compile = function(options) {
@@ -37,18 +35,5 @@ module.exports.compile = function(options) {
 };
 
 module.exports.deps = function(options) {
-  options = options || {};
-  options.name = (options.name || 'dependencies') + '.js';
-
-  return common.lazypipe()
-    .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init());
-    })
-    .pipe(common.gulp.concat, options.name)
-    .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
-    })
-    .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.uglify());
-    })();
+  return require('../generators/deps')(options, '.js', common, common.gulp.uglify);
 };

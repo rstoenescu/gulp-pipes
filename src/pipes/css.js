@@ -10,9 +10,7 @@ var defaultAutoPrefixer = {
 };
 
 module.exports.lint = function() {
-  return common.lazypipe()
-    .pipe(common.gulp.stylint)
-    .pipe(common.gulp.stylint.reporter)();
+  return require('../generators/lint')(common, common.gulp.stylint, common.gulp.stylint.reporter);
 };
 
 module.exports.compile = function(options) {
@@ -39,18 +37,5 @@ module.exports.compile = function(options) {
 };
 
 module.exports.deps = function(options) {
-  options = options || {};
-  options.name = (options.name || 'dependencies') + '.css';
-
-  return common.lazypipe()
-    .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init());
-    })
-    .pipe(common.gulp.concat, options.name)
-    .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
-    })
-    .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.minifyCss());
-    })();
+  return require('../generators/deps')(options, '.css', common, common.gulp.minifyCss);
 };
