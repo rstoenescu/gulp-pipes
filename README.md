@@ -12,7 +12,7 @@
 
 ## Description
 
-Opinionated, reusable, ready to use Gulp pipes for handling CSS, JS and HTML files and much more.
+Opinionated, reusable Gulp pipes for handling CSS, JS and HTML files and much more.
 
 ## Installation
 
