@@ -20,8 +20,7 @@ Opinionated, reusable Gulp pipes for handling CSS, JS and HTML files and much mo
 npm install gulp-pipes
 ```
 
-## To-do
-* `preview` pipes (live reload on your browsers).
+
 
 ## Usage
 
