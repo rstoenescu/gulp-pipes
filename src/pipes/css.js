@@ -33,6 +33,8 @@ module.exports.compile = function(options) {
     })
     .pipe(function() {
       return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
+    }).pipe(function() {
+      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min.css'}));
     })();
 };
 

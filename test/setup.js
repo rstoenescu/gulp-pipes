@@ -3,7 +3,11 @@
  * (only for testing)
  */
 
-expect = require('chai').expect;
+var chai = require('chai');
+
+expect = chai.expect;
+chai.use(require('chai-string'));
+
 assert = require('stream-assert');
 fileStream = require('./create-file-stream');
 

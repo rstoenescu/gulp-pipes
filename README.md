@@ -84,6 +84,7 @@ return gulp.src('./some-file.css')
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
     * (optional) Object `autoprefixer` - gulp-autoprefixer options
+    * (optional) Boolean `extmin` - adds '.min' to extension (use in conjunction with `prod` only)
 
 Development mode does:
   * Compiles Stylus files with [NIB](http://tj.github.io/nib/)
@@ -131,6 +132,7 @@ return gulp.src('./some-file.js')
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
     * (optional) Object `pack` - Webpack configuration
+    * (optional) Boolean `extmin` - adds '.min' to extension (use in conjunction with `prod` only)
 
 Development mode does:
   * Compiles with Webpack

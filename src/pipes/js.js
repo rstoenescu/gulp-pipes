@@ -31,6 +31,9 @@ module.exports.compile = function(options) {
     .pipe(webpack, config)
     .pipe(function() {
       return common.gulp.if(options.prod, common.gulp.uglify());
+    })
+    .pipe(function() {
+      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min.js'}));
     })();
 };
 

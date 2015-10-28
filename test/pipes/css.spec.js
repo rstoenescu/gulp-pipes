@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 describe('CSS', function() {
 
   var precompFile    = 'body\n  background-color white';
@@ -28,9 +30,12 @@ describe('CSS', function() {
         .pipe(pipes.css.compile())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
+          var base = path.basename(d.path);
           var compiled = 'body {\n  background-color: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;base64,';
 
           expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
+          expect(base).to.endWith('.css');
+          expect(base).to.not.endWith('.min.css');
         }))
         .pipe(assert.end(done));
     });
@@ -42,7 +47,27 @@ describe('CSS', function() {
         }))
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
+          var base = path.basename(d.path);
+
           expect(d.contents.toString()).to.equal('body{background-color:#fff}');
+          expect(base).to.endWith('.css');
+          expect(base).to.not.endWith('.min.css');
+        }))
+        .pipe(assert.end(done));
+    });
+
+    it('should be able to prod-compile and change extension to .min.js', function(done) {
+      fileStream(precompFile)
+        .pipe(pipes.css.compile({
+          prod: true,
+          extmin: true
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var base = path.basename(d.path);
+
+          expect(d.contents.toString()).to.equal('body{background-color:#fff}');
+          expect(base).to.endWith('.min.css');
         }))
         .pipe(assert.end(done));
     });
@@ -59,6 +84,7 @@ describe('CSS', function() {
           var compiled = 'body {\n  background-color: white;\n\n } \nbody    {\n  background-color: black;\n }\n\n \n/*# sourceMappingURL=data:application/json;base64,';
 
           expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
+          expect(path.basename(d.path)).to.equal('dependencies.css');
         }))
         .pipe(assert.end(done));
     });
@@ -73,6 +99,23 @@ describe('CSS', function() {
           var compiled = 'body{background-color:#fff}';
 
           expect(d.contents.toString()).to.equal(compiled);
+          expect(path.basename(d.path)).to.equal('dependencies.css');
+        }))
+        .pipe(assert.end(done));
+    });
+
+    it('should be able to prod-compile and change extension to .min.css', function(done) {
+      fileStream(cssFile)
+        .pipe(pipes.css.deps({
+          prod: true,
+          extmin: true
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var compiled = 'body{background-color:#fff}';
+
+          expect(d.contents.toString()).to.equal(compiled);
+          expect(path.basename(d.path)).to.equal('dependencies.min.css');
         }))
         .pipe(assert.end(done));
     });

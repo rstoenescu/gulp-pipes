@@ -14,5 +14,8 @@ module.exports = function(options, extension, common, min) {
     })
     .pipe(function() {
       return common.gulp.if(options.prod, min());
+    })
+    .pipe(function() {
+      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min' + extension}));
     })();
 };
