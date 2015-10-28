@@ -17,6 +17,7 @@
     "assert": true,
     "fileStream": true,
     "pipes": true,
+    "process": true,
 
     "inBrowser": true,
     "moquire": true,

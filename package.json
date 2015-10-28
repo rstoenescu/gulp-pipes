@@ -1,8 +1,11 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -r test/setup.js test/**/*.spec.js",
     "coverage": "google-chrome ./coverage/lcov-report/index.html"
@@ -23,10 +26,13 @@
   "homepage": "https://github.com/rstoenescu/gulp-pipes#readme",
   "dependencies": {
     "eslint-config-defaults": "^7.0.1",
+    "find-root": "^0.1.1",
+    "fs": "0.0.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.0.0",
+    "gulp-header": "^1.7.1",
     "gulp-html5-lint": "^1.0.1",
     "gulp-htmlmin": "^1.2.0",
     "gulp-if": "^2.0.0",
@@ -38,8 +44,10 @@
     "gulp-uglify": "^1.4.2",
     "gulp-watch": "^4.3.5",
     "lazypipe": "^1.0.1",
+    "lodash": "^3.10.1",
     "merge": "^1.2.0",
     "nib": "^1.1.0",
+    "path": "^0.12.7",
     "vinyl-named": "^1.1.0",
     "vinyl-named-with-path": "^1.0.0",
     "webpack-stream": "^2.1.1"

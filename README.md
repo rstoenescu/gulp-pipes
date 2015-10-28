@@ -12,7 +12,13 @@
 
 ## Description
 
-Opinionated reusable Gulp pipes for handling CSS, JS and HTML files.
+Opinionated, reusable, ready to use Gulp pipes for handling CSS, JS and HTML files and much more.
+
+## Installation
+
+``` bash
+npm install gulp-pipes
+```
 
 ## To-do
 * `preview` pipes (live reload on your browsers).
@@ -35,11 +41,36 @@ gulp.task('some-task', function() {
 
 
 
-### CSS
+
+## Banner
+* Adds a banner as header for files
+* Comes with a default template file which takes information from your package.json
+
+``` js
+return gulp.src(...)
+  .pipe(pipes.banner(...))
+```
+
+Parameters:
+  * (optional) Object - with properties:
+    * (optional) String `templatePath` -- full path to a template file
+    * (optional) Object `variables` -- variables to use on the template; gets populated automatically with `pkg` property which is your package.json file
+
+Template file example (this is the default supplied one):
+``` text
+/* <%= pkg.name %> v<%= pkg.version %>
+ * <%= pkg.homepage ? pkg.homepage + ' ' : '' %><%= pkg.license ? pkg.license + ' license' : '' %>
+ * (c) <%= year %> <%= pkg.author.name || pkg.author %>
+ */
+```
+All variables from above are taken from `variables` object.
+
+
+## CSS
 * Supports **only** Stylus files.
 
-#### Linter
-* Method: .css.lint()
+### Linter
+* Method: pipes.css.lint()
 * Parameters: *none*
 
 ``` js
@@ -47,8 +78,8 @@ return gulp.src('./some-file.css')
   .pipe(pipes.css.lint())
 ```
 
-#### Compiler
-* Method: .css.compile()
+### Compiler
+* Method: pipes.css.compile()
 * Parameters:
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
@@ -64,8 +95,8 @@ Production mode does:
   * Auto prefixes properties for cross-browser compatibility
   * Minifies
 
-#### Dependencies Compiler
-* Method: .css.deps()
+### Dependencies Compiler
+* Method: pipes.css.deps()
 * Parameters:
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
@@ -82,11 +113,11 @@ Production mode does:
 
 
 
-### JS
+## JS
 * Uses [Webpack](https://webpack.github.io/)
 
-#### Linter
-* Method: .js.lint()
+### Linter
+* Method: pipes.js.lint()
 * Parameters: *none*
 
 ``` js
@@ -94,8 +125,8 @@ return gulp.src('./some-file.js')
   .pipe(pipes.js.lint())
 ```
 
-#### Compiler
-* Method: .js.compile()
+### Compiler
+* Method: pipes.js.compile()
 * Parameters:
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
@@ -109,8 +140,8 @@ Production mode does:
   * Compiles with Webpack
   * Minifies
 
-#### Dependencies Compiler
-* Method: .js.deps()
+### Dependencies Compiler
+* Method: pipes.js.deps()
 * Parameters:
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)
@@ -127,11 +158,11 @@ Production mode does:
 
 
 
-### HTML
+## HTML
 * Uses [Webpack](https://webpack.github.io/)
 
-#### Linter
-* Method: .html.lint()
+### Linter
+* Method: pipes.html.lint()
 * Parameters: *none*
 
 ``` js
@@ -139,8 +170,8 @@ return gulp.src('./some-file.js')
   .pipe(pipes.html.lint())
 ```
 
-#### Compiler
-* Method: .html.compile()
+### Compiler
+* Method: pipes.html.compile()
 * Parameters:
   * (optional) Object - with properties:
     * (optional) Boolean `prod` - production or not (dev)

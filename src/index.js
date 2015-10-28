@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  css: require('./lib/css'),
-  js: require('./lib/js'),
-  html: require('./lib/html')
+  css: require('./pipes/css'),
+  js: require('./pipes/js'),
+  html: require('./pipes/html'),
+  banner: require('./pipes/banner')
 };
