@@ -24,7 +24,9 @@ describe('JS', function() {
 
     it('should be able to dev-compile', function(done) {
       fileStream(jsFile, jsFileTwo)
-        .pipe(pipes.js.compile())
+        .pipe(pipes.js.compile({
+          retain: 'name'
+        }))
         .pipe(assert.length(2))
         .pipe(assert.all(function(d) {
           var content = d.contents.toString();
@@ -41,7 +43,8 @@ describe('JS', function() {
     it('should be able to prod-compile', function(done) {
       fileStream(jsFile, jsFileTwo)
         .pipe(pipes.js.compile({
-          prod: true
+          prod: true,
+          retain: 'path'
         }))
         .pipe(assert.length(2))
         .pipe(assert.all(function(d) {
@@ -61,6 +64,7 @@ describe('JS', function() {
       fileStream(jsFile, jsFileTwo)
         .pipe(pipes.js.compile({
           prod: true,
+          retain: 'name',
           extmin: true
         }))
         .pipe(assert.length(2))
