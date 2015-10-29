@@ -29,10 +29,10 @@ module.exports.compile = function(options) {
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(options.retain === 'name', withName());
+      return common.gulp.if(!options.retainPath, withName());
     })
     .pipe(function() {
-      return common.gulp.if(options.retain === 'path', withPath());
+      return common.gulp.if(options.retainPath, withPath());
     })
     .pipe(webpack, config)
     .pipe(function() {

@@ -22,11 +22,25 @@ describe('JS', function() {
 
   describe('compile', function() {
 
-    it('should be able to dev-compile', function(done) {
-      fileStream(jsFile, jsFileTwo)
-        .pipe(pipes.js.compile({
-          retain: 'name'
+    it('should be able to dev-compile single entry', function(done) {
+      fileStream(jsFile)
+        .pipe(pipes.js.compile())
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var content = d.contents.toString();
+          var base = path.basename(d.path);
+
+          expect(content).to.contain('__webpack_require__');
+          expect(content).to.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(base).to.endWith('.js');
+          expect(base).to.not.endWith('.min.js');
         }))
+        .pipe(assert.end(done));
+    });
+
+    it('should be able to dev-compile multiple entry points', function(done) {
+      fileStream(jsFile, jsFileTwo)
+        .pipe(pipes.js.compile())
         .pipe(assert.length(2))
         .pipe(assert.all(function(d) {
           var content = d.contents.toString();
@@ -44,7 +58,7 @@ describe('JS', function() {
       fileStream(jsFile, jsFileTwo)
         .pipe(pipes.js.compile({
           prod: true,
-          retain: 'path'
+          retainPath: true
         }))
         .pipe(assert.length(2))
         .pipe(assert.all(function(d) {
@@ -64,7 +78,6 @@ describe('JS', function() {
       fileStream(jsFile, jsFileTwo)
         .pipe(pipes.js.compile({
           prod: true,
-          retain: 'name',
           extmin: true
         }))
         .pipe(assert.length(2))
@@ -76,6 +89,20 @@ describe('JS', function() {
           expect(content).to.not.contain('\n//# sourceMappingURL=data:application/json;base64,');
           expect(content).to.contain('!function(r){function e(t){if(o[t])return o[t].exports;var n=o[t]={exports:{},id:t,loaded:!1};');
           expect(base).to.endWith('.min.js');
+        }))
+        .pipe(assert.end(done));
+    });
+
+    it('should pack assets required with webpack raw plugin', function(done) {
+      /*
+       * Wished we could use fileStream() but due to Webpack & Raw loader plugin
+       * internals, we can't... we really need to read from an actual file on the filesystem.
+       */
+      require('gulp').src('test/fixtures/raw-load.js')
+        .pipe(pipes.js.compile())
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          expect(d.contents.toString()).to.contain('module.exports = "<h1>view</h1>\\n"');
         }))
         .pipe(assert.end(done));
     });

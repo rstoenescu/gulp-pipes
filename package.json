@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "files": [
@@ -49,6 +49,7 @@
     "merge": "^1.2.0",
     "nib": "^1.1.0",
     "path": "^0.12.7",
+    "raw-loader": "^0.5.1",
     "require-dir": "^0.3.0",
     "vinyl-named": "^1.1.0",
     "vinyl-named-with-path": "^1.0.0",

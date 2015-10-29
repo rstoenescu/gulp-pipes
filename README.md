@@ -137,7 +137,7 @@ return gulp.src('./some-file.js')
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
 | pack | Object | Webpack configuration |
-| retain | String | "name" or "path"; makes webpack use the same name (or path + name) as source files |
+| retainPath | Boolean | makes webpack use the same *path* + *name* as source files; by default, only *name* is retained |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
 
 |  | Development Mode | Production Mode |
@@ -145,6 +145,15 @@ return gulp.src('./some-file.js')
 | Compiles with Webpack | * | * |
 | Adds sourcemaps | * |  |
 | Minifies |  | * |
+
+If you want your compiled file to contain assets, then in your .js file to be compiled:
+``` js
+var content = require('raw!./template.html');
+```
+Your compiled file will contain:
+``` js
+var content = '<html></html>';
+```
 
 > **IMPORTANT**
 
