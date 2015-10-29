@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "files": [
@@ -51,6 +51,7 @@
     "path": "^0.12.7",
     "require-dir": "^0.3.0",
     "vinyl-named": "^1.1.0",
+    "vinyl-named-with-path": "^1.0.0",
     "webpack-stream": "^2.1.1"
   },
   "devDependencies": {
@@ -60,7 +61,6 @@
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
-    "mock-fs": "^3.4.0",
     "stream-array": "^1.1.1",
     "stream-assert": "^2.0.3"
   }

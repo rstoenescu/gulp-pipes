@@ -2,7 +2,8 @@
 
 var
   common = require('../common'),
-  named = require('vinyl-named'),
+  withName = require('vinyl-named'),
+  withPath = require('vinyl-named-with-path'),
   webpack = require('webpack-stream')
   ;
 
@@ -27,7 +28,12 @@ module.exports.compile = function(options) {
   );
 
   return common.lazypipe()
-    .pipe(named)
+    .pipe(function() {
+      return common.gulp.if(options.retain === 'name', withName());
+    })
+    .pipe(function() {
+      return common.gulp.if(options.retain === 'path', withPath());
+    })
     .pipe(webpack, config)
     .pipe(function() {
       return common.gulp.if(options.prod, common.gulp.uglify());

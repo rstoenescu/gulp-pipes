@@ -137,6 +137,7 @@ return gulp.src('./some-file.js')
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
 | pack | Object | Webpack configuration |
+| retain | String | "name" or "path"; makes webpack use the same name (or path + name) as source files |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
 
 |  | Development Mode | Production Mode |
@@ -145,9 +146,25 @@ return gulp.src('./some-file.js')
 | Adds sourcemaps | * |  |
 | Minifies |  | * |
 
+> **IMPORTANT**
+
+> Also good to know that you can also use *{base: 'base/path'}* as option for your gulp.src().
+
+``` js
+gulp.task('some-task', function() {
+  return gulp.src('path/to/script.js', {base: 'path'})
+    .pipe(pipes.js.compile({
+      retain: "path"
+    }))
+    .pipe(gulp.dest('dest/path'));
+})
+```
+
 > **NOTE**
 
 > Webpack configuration supplied gets merged with a default one which adds sourcemaps on development mode
+
+
 
 ### Dependencies Compiler
 * Method: `pipes.js.deps()`
