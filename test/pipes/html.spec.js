@@ -5,6 +5,8 @@ describe('HTML', function() {
   var htmlFile    = '<!DOCTYPE html><html><head>  <title>Title</title>  \n <!-- This is a comment --> <body>   \n\nOne</body>\n\n </html>   ';
   var htmlFileTwo = '<html>  \n <body>   \n\n<p>Two  </p><!-- Another comment --></body>\n\n </html>   ';
 
+  var expectedHtmlIncludeFile = '<!DOCTYPE html><html><body><h1>view</h1>\n<label>rstoenescu</label>\n</body></html>\n';
+
   it('should be able to lint valid HTML', function(done) {
     fileStream(htmlFile)
       .pipe(pipes.html.lint())
@@ -50,6 +52,16 @@ describe('HTML', function() {
         }))
         .pipe(assert.second(function(d) {
           expect(d.contents.toString()).to.equal('<html><body><p>Two</p>');
+        }))
+        .pipe(assert.end(done));
+    });
+
+    it('should include other HTMLs', function(done) {
+      require('gulp').src('./test/fixtures/main.html')
+        .pipe(pipes.html.compile())
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          expect(d.contents.toString()).to.equal(expectedHtmlIncludeFile);
         }))
         .pipe(assert.end(done));
     });

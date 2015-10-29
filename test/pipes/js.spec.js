@@ -4,8 +4,8 @@ var path = require('path');
 
 describe('JS', function() {
 
-  var jsFile    = 'var a = \'one\'';
-  var jsFileTwo = 'var a = \'two\'';
+  var jsFile    = 'var a = \'one\';';
+  var jsFileTwo = 'var a = \'two\';';
 
   it('should be able to lint', function(done) {
     fileStream(jsFile, jsFileTwo)
@@ -85,7 +85,7 @@ describe('JS', function() {
         .pipe(pipes.js.deps())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
-          var compiled = 'var a = \'one\'\nvar a = \'two\'\n//# sourceMappingURL=data:application/json;base64,';
+          var compiled = 'var a = \'one\';\nvar a = \'two\';\n//# sourceMappingURL=data:application/json;base6';
 
           expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
           expect(path.basename(d.path)).to.equal('dependencies.js');

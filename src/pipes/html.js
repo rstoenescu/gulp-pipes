@@ -13,6 +13,11 @@ var defaultMinifier = {
   minifyCSS: true
 };
 
+var defaultInclude = {
+  prefix: '@@',
+  basepath: '@file'
+};
+
 module.exports.lint = function() {
   return common.lazypipe()
     .pipe(common.gulp.html5Lint)();
@@ -20,13 +25,15 @@ module.exports.lint = function() {
 
 module.exports.compile = function(options) {
   options = options || {};
-  var config = common.merge(true, defaultMinifier, options.min);
+  var minifierConfig = common.merge(true, defaultMinifier, options.min);
+  var includeConfig = common.merge(true, defaultInclude, options.include);
 
   return common.lazypipe()
+    .pipe(common.gulp.fileInclude, includeConfig)
     .pipe(function() {
       return common.gulp.if(
         options.prod,
-        common.gulp.htmlmin(config)
+        common.gulp.htmlmin(minifierConfig)
       );
     })();
 };

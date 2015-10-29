@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "files": [
@@ -15,6 +15,7 @@
     "url": "git+https://github.com/rstoenescu/gulp-pipes.git"
   },
   "keywords": [
+    "gulpplugin",
     "gulp",
     "pipe"
   ],
@@ -32,6 +33,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.0.0",
+    "gulp-file-include": "^0.13.7",
     "gulp-header": "^1.7.1",
     "gulp-html5-lint": "^1.0.1",
     "gulp-htmlmin": "^1.2.0",
@@ -47,6 +49,7 @@
     "merge": "^1.2.0",
     "nib": "^1.1.0",
     "path": "^0.12.7",
+    "require-dir": "^0.3.0",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^2.1.1"
   },
@@ -57,6 +60,7 @@
     "gulp-util": "^3.0.7",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
+    "mock-fs": "^3.4.0",
     "stream-array": "^1.1.1",
     "stream-assert": "^2.0.3"
   }

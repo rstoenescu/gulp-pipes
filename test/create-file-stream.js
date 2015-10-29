@@ -1,7 +1,9 @@
 'use strict';
 
-var array = require('stream-array');
-var PhonyFile = require('gulp-util').File;
+var
+  array = require('stream-array'),
+  PhonyFile = require('gulp-util').File
+  ;
 
 module.exports = function() {
   var args = Array.prototype.slice.call(arguments);
