@@ -2,7 +2,7 @@
 
 describe('HTML', function() {
 
-  var htmlFile    = '<!DOCTYPE html><html><head>  <title>Title</title>  \n <!-- This is a comment --> <body>   \n\nOne</body>\n\n </html>   ';
+  var htmlFile    = '<!DOCTYPE html><html><head>  <title>Title</title>  \n <!-- This is a comment --></head> <body>   \n\nOne</body>\n\n </html>   ';
   var htmlFileTwo = '<html>  \n <body>   \n\n<p>Two  </p><!-- Another comment --></body>\n\n </html>   ';
 
   var expectedHtmlIncludeFile = '<!DOCTYPE html><html><body><h1>view</h1>\n<label>rstoenescu</label>\n</body></html>\n';
