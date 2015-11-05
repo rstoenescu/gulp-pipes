@@ -39,7 +39,7 @@ describe('Banner', function() {
       .pipe(assert.first(function(d) {
         var content = d.contents.toString();
 
-        expect(content).to.equal('/* Package Name v5.5.5\n * http://quasar-framework.org RLIC license\n * (c) 1986 Author Name\n */\n' + file);
+        expect(content).to.equal('/*!\n * Package Name v5.5.5\n * http://quasar-framework.org RLIC license\n * (c) 1986 Author Name\n */\n' + file);
       }))
       .pipe(assert.end(done));
   });
@@ -65,7 +65,7 @@ describe('Banner', function() {
       .pipe(assert.first(function(d) {
         var content = d.contents.toString();
 
-        expect(content).to.equal('/* pkgname v1.2.3\n * http://site.com CIL license\n * (c) 6891 somename\n */\n' + file);
+        expect(content).to.equal('/*!\n * pkgname v1.2.3\n * http://site.com CIL license\n * (c) 6891 somename\n */\n' + file);
       }))
       .pipe(assert.end(done));
   });
