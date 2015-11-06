@@ -17,7 +17,19 @@
     "assert": true,
     "fileStream": true,
     "pipes": true,
-    "process": true
+    "process": true,
+
+    "inBrowser": true,
+    "moquire": true,
+    "chai": true,
+    "expect": true,
+    "sinon": true,
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true
   },
 
   "rules": {
