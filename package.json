@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "files": [
@@ -31,8 +31,8 @@
     "find-root": "^0.1.1",
     "fs": "^0.0.2",
     "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-css-base64": "^1.3.2",
     "gulp-eslint": "^1.0.0",
     "gulp-file-include": "^0.13.7",
     "gulp-header": "^1.7.1",
@@ -46,6 +46,7 @@
     "gulp-stylint": "^3.0.0",
     "gulp-stylus": "^2.1.0",
     "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.7",
     "lazypipe": "^1.0.1",
     "merge": "^1.2.0",
     "nib": "^1.1.0",
@@ -60,7 +61,6 @@
     "chai": "^3.4.0",
     "chai-string": "^1.1.3",
     "codecov.io": "^0.1.6",
-    "gulp-util": "^3.0.7",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "stream-array": "^1.1.1",

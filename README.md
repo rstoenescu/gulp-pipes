@@ -89,13 +89,14 @@ return gulp.src('./some-file.css')
 | Name | Type | Description |
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
-| autoprefixer | Object | gulp-autoprefixer options |
+| base64 | Object | [gulp-css-base64](https://www.npmjs.com/package/gulp-css-base64) options |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
 
 |  | Development Mode | Production Mode |
 | --- | --- | --- |
 | Compile Stylus files with [NIB](http://tj.github.io/nib/) | * | * |
 | Auto prefixes properties for cross-browser compatibility | * | * |
+| Auto embeds small images with base64 encoding | * | * |
 | Adds sourcemaps | * |  |
 | Minifies |  | * |
 
@@ -149,6 +150,10 @@ return gulp.src('./some-file.js')
 If you want your compiled file to contain assets, then in your .js file to be compiled:
 ``` js
 var content = require('raw!./template.html');
+
+// BUT make sure you npm install raw-loader
+// (Cannot include it in this package because Webpack will try to
+// require it from your project folder's node_modules)
 ```
 Your compiled file will contain:
 ``` js

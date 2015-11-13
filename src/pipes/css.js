@@ -15,19 +15,14 @@ module.exports.lint = function() {
 
 module.exports.compile = function(options) {
   options = options || {};
-
-  var autoprefixerConfig = common.merge(
-    true,
-    defaultAutoPrefixer,
-    options.autoprefixer
-  );
+  options.base64 = options.base64 || {};
 
   return common.lazypipe()
     .pipe(function() {
       return common.gulp.if(!options.prod, common.gulp.sourcemaps.init());
     })
     .pipe(common.gulp.stylus, {use: [nib()]})
-    .pipe(common.gulp.autoprefixer, autoprefixerConfig)
+    .pipe(common.gulp.cssBase64, options.base64)
     .pipe(function() {
       return common.gulp.if(options.prod, common.gulp.minifyCss());
     })
