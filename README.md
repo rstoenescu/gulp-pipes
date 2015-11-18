@@ -168,7 +168,7 @@ var content = '<html></html>';
 gulp.task('some-task', function() {
   return gulp.src('path/to/script.js', {base: 'path'})
     .pipe(pipes.js.compile({
-      retain: "path"
+      retainPath: true
     }))
     .pipe(gulp.dest('dest/path'));
 })
