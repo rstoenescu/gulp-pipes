@@ -2,7 +2,7 @@
 
 module.exports = function(options, extension, common, min) {
   options = options || {};
-  options.name = (options.name || 'dependencies') + extension;
+  options.name = (options.name || 'dependencies') + (options.prod && options.extmin ? '.min' : '') + extension;
 
   return common.lazypipe()
     .pipe(function() {
@@ -14,8 +14,5 @@ module.exports = function(options, extension, common, min) {
     })
     .pipe(function() {
       return common.gulp.if(options.prod, min());
-    })
-    .pipe(function() {
-      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min' + extension}));
     })();
 };
