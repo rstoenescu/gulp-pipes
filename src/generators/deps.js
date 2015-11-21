@@ -16,9 +16,6 @@ module.exports = function(options, extension, common, min) {
       return common.gulp.if(options.prod, min());
     })
     .pipe(function() {
-      return common.gulp.if(extension === '.css', common.gulp.cssBase64(options.base64 || {}));
-    })
-    .pipe(function() {
       return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min' + extension}));
     })();
 };

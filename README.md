@@ -107,12 +107,10 @@ return gulp.src('./some-file.css')
 | Name | Type | Description |
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
-| base64 | Object | [gulp-css-base64](https://www.npmjs.com/package/gulp-css-base64) options |
 
 |  | Development Mode | Production Mode |
 | --- | --- | --- |
 | Concats files | * | * |
-| Auto embeds small images with base64 encoding | * | * |
 | Adds sourcemaps | * |  |
 | Minifies |  | * |
 
