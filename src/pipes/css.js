@@ -5,10 +5,6 @@ var
   nib = require('nib')
   ;
 
-var defaultAutoPrefixer = {
-  browsers: ['last 3 versions']
-};
-
 module.exports.lint = function() {
   return require('../generators/lint')(common, common.gulp.stylint, common.gulp.stylint.reporter);
 };
