@@ -19,7 +19,7 @@ module.exports.compile = function(options) {
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init());
+      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init({loadMaps: true}));
     })
     .pipe(common.gulp.stylus, {use: [nib()]})
     .pipe(common.gulp.cssBase64, options.base64)

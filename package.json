@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Opinionated reusable Gulp pipes",
   "main": "src/index.js",
   "files": [

@@ -112,6 +112,7 @@ return gulp.src('./some-file.css')
 | --- | --- | --- |
 | Concats files | * | * |
 | Adds sourcemaps | * |  |
+| Loads & merges existing sourcemaps | * |  |
 | Minifies |  | * |
 
 
@@ -193,6 +194,7 @@ gulp.task('some-task', function() {
 | --- | --- | --- |
 | Compiles with Webpack | * | * |
 | Adds sourcemaps | * |  |
+| Loads & merges existing sourcemaps | * |  |
 | Minifies |  | * |
 
 

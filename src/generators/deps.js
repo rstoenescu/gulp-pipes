@@ -6,7 +6,7 @@ module.exports = function(options, extension, common, min) {
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init());
+      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init({loadMaps: true}));
     })
     .pipe(common.gulp.concat, options.name)
     .pipe(function() {
