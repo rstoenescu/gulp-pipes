@@ -18,8 +18,6 @@
 $ npm install --save-dev gulp-pipes
 ```
 
-
-
 ## Usage Example
 
 ``` js
@@ -40,6 +38,13 @@ gulp.task('some-task', function() {
 > All config object's properties are optional.
 
 
+## Jump to Point of Interest
+
+* [Banner pipes](#banner)
+* [CSS file pipes](#css)
+* [Javascript file pipes](#js)
+* [HTML file pipes](#html)
+* [Image file pipes](#images)
 
 
 ## Banner
