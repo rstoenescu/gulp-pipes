@@ -2,25 +2,18 @@
   "extends": "defaults/configurations/google",
 
   "env": {
-    "browser": true
+    "browser": false
   },
 
   "globals": {
-    "q": true,
-    "quasar": true,
-    "require": true,
-    "$": true,
     "module": true,
     "exports": true,
-    "_": true,
-    "testing": true,
     "assert": true,
     "fileStream": true,
     "pipes": true,
     "process": true,
+    "global": true,
 
-    "inBrowser": true,
-    "moquire": true,
     "chai": true,
     "expect": true,
     "sinon": true,

@@ -5,10 +5,9 @@
 
 var chai = require('chai');
 
-expect = chai.expect;
+global.expect = chai.expect;
 chai.use(require('chai-string'));
 
-assert = require('stream-assert');
-fileStream = require('./create-file-stream');
-
-pipes = require('../src');
+global.assert = require('stream-assert');
+global.fileStream = require('./create-file-stream');
+global.pipes = require('../src');

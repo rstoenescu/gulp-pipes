@@ -1,5 +1,5 @@
 # Gulp Pipes
-> Opinionated, reusable Gulp pipes for handling CSS, JS and HTML files and much more.
+> Opinionated, reusable Gulp pipes for handling CSS, JS, HTML, image files and more.
 
 <a href="https://badge.fury.io/js/gulp-pipes"><img src="https://badge.fury.io/js/gulp-pipes.svg"></a>
 <a href="https://circleci.com/gh/rstoenescu/gulp-pipes/tree/master"><img src="https://circleci.com/gh/rstoenescu/gulp-pipes/tree/master.svg?style=shield"></a>
@@ -43,13 +43,13 @@ gulp.task('some-task', function() {
 
 
 ## Banner
-* Method: `pipes.banner(...);`
+* Method: `pipes.banner(configObject);`
 * Adds a banner as header for files
 * Comes with a default template file which takes information from your package.json
 
 ``` js
 return gulp.src(...)
-  .pipe(pipes.banner(...))
+  .pipe(pipes.banner(configObject))
 ```
 
 Config object properties:
@@ -83,7 +83,7 @@ return gulp.src('./some-file.css')
 ```
 
 ### Compiler
-* Method: `pipes.css.compile()`
+* Method: `pipes.css.compile(configObject)`
 * Config object parameters:
 
 | Name | Type | Description |
@@ -101,7 +101,7 @@ return gulp.src('./some-file.css')
 | Minifies |  | * |
 
 ### Dependencies Compiler
-* Method: `pipes.css.deps()`
+* Method: `pipes.css.deps(configObject)`
 * Config object parameters:
 
 | Name | Type | Description |
@@ -132,7 +132,7 @@ return gulp.src('./some-file.js')
 ```
 
 ### Compiler
-* Method: `pipes.js.compile()`
+* Method: `pipes.js.compile(configObject)`
 * Config object parameters:
 
 | Name | Type | Description |
@@ -182,7 +182,7 @@ gulp.task('some-task', function() {
 
 
 ### Dependencies Compiler
-* Method: `pipes.js.deps()`
+* Method: `pipes.js.deps(configObject)`
 * Config object parameters:
 
 | Name | Type | Description |
@@ -256,7 +256,7 @@ return gulp.src('./some-file.js')
 ```
 
 ### Compiler
-* Method: `pipes.html.compile()`
+* Method: `pipes.html.compile(configObject)`
 * Config object parameters:
 
 | Name | Type | Description |
@@ -275,6 +275,29 @@ prefix: '@@',
 basepath: '@file'
 ```
 More details on how it works can be found [here](https://www.npmjs.com/package/gulp-file-include).
+
+
+## Images
+
+* Uses [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin)
+* Method: `pipes.image.optimize(configObject)`
+
+You can override any of the following default properties for the configuration object:
+``` js
+{
+  progressive: true,
+  svgoPlugins: [{removeViewBox: false}],
+  use: [pngquant()]
+}
+```
+
+Handles the following file types:
+ * GIF
+ * JPEG
+ * PNG
+ * SVG
+
+You can feed any types of files as it will filter and optimize only image ones.
 
 
 ## License
