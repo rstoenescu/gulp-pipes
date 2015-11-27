@@ -1,11 +1,16 @@
 'use strict';
 
-var path = require('path');
+var
+  path = require('path'),
+  gulp = require('gulp')
+  ;
 
 describe('JS', function() {
 
   var jsFile    = 'var a = \'one\';';
   var jsFileTwo = 'var a = \'two\';';
+  var jsFileSrc = './test/fixtures/one.js';
+  var jsFileSrcTwo = './test/fixtures/two.js';
 
   describe('lint', function() {
 
@@ -47,7 +52,7 @@ describe('JS', function() {
   describe('compile', function() {
 
     it('should be able to dev-compile single entry', function(done) {
-      fileStream(jsFile)
+      gulp.src(jsFileSrc)
         .pipe(pipes.js.compile())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
@@ -55,7 +60,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.contain('__webpack_require__');
-          expect(content).to.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain('//# sourceMappingURL=data:application/json;base64,');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
         }))
@@ -63,7 +68,7 @@ describe('JS', function() {
     });
 
     it('should be able to dev-compile multiple entry points', function(done) {
-      fileStream(jsFile, jsFileTwo)
+      gulp.src([jsFileSrc, jsFileSrcTwo])
         .pipe(pipes.js.compile())
         .pipe(assert.length(2))
         .pipe(assert.all(function(d) {
@@ -71,7 +76,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.contain('__webpack_require__');
-          expect(content).to.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain('//# sourceMappingURL=data:application/json;base64,');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
         }))
@@ -79,19 +84,19 @@ describe('JS', function() {
     });
 
     it('should be able to prod-compile', function(done) {
-      fileStream(jsFile, jsFileTwo)
+      gulp.src([jsFileSrc, jsFileSrcTwo])
         .pipe(pipes.js.compile({
           prod: true,
           retainPath: true
         }))
         .pipe(assert.length(2))
-        .pipe(assert.all(function(d) {
+        .pipe(assert.first(function(d) {
           var content = d.contents.toString();
           var base = path.basename(d.path);
 
           expect(content).to.not.contain('__webpack_require__');
-          expect(content).to.not.contain('\n//# sourceMappingURL=data:application/json;base64,');
-          expect(content).to.contain('!function(r){function e(t){if(o[t])return o[t].exports;var n=o[t]={exports:{},id:t,loaded:!1};');
+          expect(content).to.not.contain('//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain('!function(o){function e(r){if(n[r])return n[r].exports;var t=n[r]={exports:{},id:r,loaded:!1};');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
         }))
@@ -99,19 +104,19 @@ describe('JS', function() {
     });
 
     it('should be able to prod-compile and change extension to .min.js', function(done) {
-      fileStream(jsFile, jsFileTwo)
+      gulp.src([jsFileSrc, jsFileSrcTwo])
         .pipe(pipes.js.compile({
           prod: true,
           extmin: true
         }))
         .pipe(assert.length(2))
-        .pipe(assert.all(function(d) {
+        .pipe(assert.first(function(d) {
           var content = d.contents.toString();
           var base = path.basename(d.path);
 
           expect(content).to.not.contain('__webpack_require__');
-          expect(content).to.not.contain('\n//# sourceMappingURL=data:application/json;base64,');
-          expect(content).to.contain('!function(r){function e(t){if(o[t])return o[t].exports;var n=o[t]={exports:{},id:t,loaded:!1};');
+          expect(content).to.not.contain('//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain(' n="one",n="one",n="one",n="one",n="one",n="one",n="one",n="one",n="one",n="one",n="one",');
           expect(base).to.endWith('.min.js');
         }))
         .pipe(assert.end(done));
@@ -122,11 +127,11 @@ describe('JS', function() {
        * Wished we could use fileStream() but due to Webpack & Raw loader plugin
        * internals, we can't... we really need to read from an actual file on the filesystem.
        */
-      require('gulp').src('test/fixtures/raw-load.js')
+      gulp.src('./test/fixtures/raw-load.js')
         .pipe(pipes.js.compile())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
-          expect(d.contents.toString()).to.contain('module.exports = "<h1>view</h1>\\n"');
+          expect(d.contents.toString()).to.contain('module.exports = \\"<h1>view</h1>\\\\n\\"');
         }))
         .pipe(assert.end(done));
     });

@@ -9,7 +9,7 @@ var
 
 var defaultWebpack = {
   dev: {
-    devtool: '#inline-source-map',
+    devtool: '#cheap-module-eval-source-map',
   },
   prod: {}
 };
