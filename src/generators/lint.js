@@ -1,7 +1,12 @@
 'use strict';
 
-module.exports = function(common, linter, reporter) {
-  return common.lazypipe()
-    .pipe(linter)
-    .pipe(reporter)();
+module.exports = function(options) {
+  options.failerOptions = options.failerOptions || {};
+
+  return options.common.lazypipe()
+    .pipe(options.linter)
+    .pipe(options.reporter)
+    .pipe(function() {
+      return options.common.gulp.if(options.fail, options.failer('fail', {failOnWarning: true}));
+    })();
 };

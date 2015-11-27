@@ -5,8 +5,16 @@ var
   nib = require('nib')
   ;
 
-module.exports.lint = function() {
-  return require('../generators/lint')(common, common.gulp.stylint, common.gulp.stylint.reporter);
+module.exports.lint = function(options) {
+  options = options || {};
+
+  return require('../generators/lint')({
+    common: common,
+    linter: common.gulp.stylint,
+    reporter: common.gulp.stylint.reporter,
+    fail: options.fail,
+    failer: common.gulp.stylint.reporter
+  });
 };
 
 module.exports.compile = function(options) {

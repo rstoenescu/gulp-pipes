@@ -79,12 +79,20 @@ All variables from above are taken from `variables` object.
 * Supports **only** Stylus files.
 
 ### Linter
-* Method: `pipes.css.lint()`
-* Parameters: *none*
+* Method: `pipes.css.lint(configObject)`
+* Config object parameter's (which is optional) properties:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| fail | Boolean | Fail on error |
 
 ``` js
 return gulp.src('./some-file.css')
-  .pipe(pipes.css.lint())
+  .pipe(pipes.css.lint());
+
+// or fail on Error
+return gulp.src('./some-file.js')
+  .pipe(pipes.css.lint({fail: true}));
 ```
 
 ### Compiler
@@ -128,12 +136,20 @@ return gulp.src('./some-file.css')
 * Uses [Webpack](https://webpack.github.io/)
 
 ### Linter
-* Method: `pipes.js.lint()`
-* Parameters: *none*
+* Method: `pipes.js.lint(configObject)`
+* Config object parameter's (which is optional) properties:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| fail | Boolean | Fail on error |
 
 ``` js
 return gulp.src('./some-file.js')
   .pipe(pipes.js.lint())
+
+// or fail on Error
+return gulp.src('./some-file.js')
+  .pipe(pipes.js.lint({fail: true}));
 ```
 
 ### Compiler

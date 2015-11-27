@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Opinionated reusable Gulp pipes for handling CSS, JS, HTML, image files and more",
   "main": "src/index.js",
   "files": [
@@ -76,6 +76,7 @@
     "del": "^2.1.0",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
+    "mocha-eslint": "^1.0.0",
     "stream-array": "^1.1.1",
     "stream-assert": "^2.0.3"
   }

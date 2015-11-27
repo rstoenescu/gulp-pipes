@@ -7,17 +7,41 @@ describe('JS', function() {
   var jsFile    = 'var a = \'one\';';
   var jsFileTwo = 'var a = \'two\';';
 
-  it('should be able to lint', function(done) {
-    fileStream(jsFile, jsFileTwo)
-      .pipe(pipes.js.lint())
-      .pipe(assert.length(2))
-      .pipe(assert.first(function(d) {
-        expect(d.contents.toString()).to.equal(jsFile);
-      }))
-      .pipe(assert.second(function(d) {
-        expect(d.contents.toString()).to.equal(jsFileTwo);
-      }))
-      .pipe(assert.end(done));
+  describe('lint', function() {
+
+    it('should be able to lint', function(done) {
+      fileStream(jsFile, jsFileTwo)
+        .pipe(pipes.js.lint())
+        .pipe(assert.length(2))
+        .pipe(assert.first(function(d) {
+          expect(d.contents.toString()).to.equal(jsFile);
+        }))
+        .pipe(assert.second(function(d) {
+          expect(d.contents.toString()).to.equal(jsFileTwo);
+        }))
+        .pipe(assert.end(done));
+    });
+
+    it('should not fail on error by default', function(done) {
+      fileStream('var { a {')
+        .pipe(pipes.js.lint())
+        .on('error', function(err) {
+          throw new Error('Should not fail on error');
+        })
+        .pipe(assert.end(done));
+    });
+
+    it('should be able to fail on error', function(done) {
+      fileStream('var { a {')
+        .pipe(pipes.js.lint({
+          fail: true
+        }))
+        .on('error', function(err) {
+          expect(err.message).to.contain('Failed with 1 error');
+          done();
+        });
+    });
+
   });
 
   describe('compile', function() {

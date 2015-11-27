@@ -14,8 +14,16 @@ var defaultWebpack = {
   prod: {}
 };
 
-module.exports.lint = function() {
-  return require('../generators/lint')(common, common.gulp.eslint, common.gulp.eslint.format);
+module.exports.lint = function(options) {
+  options = options || {};
+
+  return require('../generators/lint')({
+    common: common,
+    linter: common.gulp.eslint,
+    reporter: common.gulp.eslint.format,
+    fail: options.fail,
+    failer: common.gulp.eslint.failAfterError
+  });
 };
 
 module.exports.compile = function(options) {
