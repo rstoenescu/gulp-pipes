@@ -7,6 +7,7 @@
     "src"
   ],
   "scripts": {
+    "prepublish": "npm test",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha -- -r test/setup.js test/**/*.spec.js",
     "coverage": "google-chrome ./coverage/lcov-report/index.html"
   },
