@@ -25,7 +25,7 @@ describe('JS', function() {
     it('should not fail on error by default', function(done) {
       fileStream('var { a {')
         .pipe(pipes.js.lint())
-        .on('error', function(err) {
+        .on('error', function() {
           throw new Error('Should not fail on error');
         })
         .pipe(assert.end(done));
@@ -46,26 +46,10 @@ describe('JS', function() {
 
   describe('compile', function() {
 
-    it('should be able to dev-compile single entry', function(done) {
-      fileStream(jsFile)
+    function testStream(files, done) {
+      fileStream.apply(null, files)
         .pipe(pipes.js.compile())
-        .pipe(assert.length(1))
-        .pipe(assert.first(function(d) {
-          var content = d.contents.toString();
-          var base = path.basename(d.path);
-
-          expect(content).to.contain('__webpack_require__');
-          expect(content).to.contain('\n//# sourceMappingURL=data:application/json;base64,');
-          expect(base).to.endWith('.js');
-          expect(base).to.not.endWith('.min.js');
-        }))
-        .pipe(assert.end(done));
-    });
-
-    it('should be able to dev-compile multiple entry points', function(done) {
-      fileStream(jsFile, jsFileTwo)
-        .pipe(pipes.js.compile())
-        .pipe(assert.length(2))
+        .pipe(assert.length(files.length))
         .pipe(assert.all(function(d) {
           var content = d.contents.toString();
           var base = path.basename(d.path);
@@ -76,6 +60,14 @@ describe('JS', function() {
           expect(base).to.not.endWith('.min.js');
         }))
         .pipe(assert.end(done));
+    }
+
+    it('should be able to dev-compile single entry', function(done) {
+      testStream([jsFile], done);
+    });
+
+    it('should be able to dev-compile multiple entry points', function(done) {
+      testStream([jsFile, jsFileTwo], done);
     });
 
     it('should be able to prod-compile', function(done) {

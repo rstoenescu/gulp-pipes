@@ -13,6 +13,7 @@
     "pipes": true,
     "process": true,
     "global": true,
+    "Buffer": true,
 
     "chai": true,
     "expect": true,
