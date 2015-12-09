@@ -8,7 +8,6 @@
 <a href="https://david-dm.org/rstoenescu/gulp-pipes#info=devDependencies" title="devDependency status"><img src="https://david-dm.org/rstoenescu/gulp-pipes/dev-status.svg"/></a>
 
 <a href="https://codecov.io/github/rstoenescu/gulp-pipes"><img src="http://codecov.io/github/rstoenescu/gulp-pipes/coverage.svg" alt="Coverage via Codecov"></a>
-<a href="https://codeclimate.com/github/rstoenescu/gulp-pipes"><img src="https://codeclimate.com/github/rstoenescu/gulp-pipes/badges/gpa.svg" /></a>
 <a href="https://www.bithound.io/github/rstoenescu/gulp-pipes"><img src="https://www.bithound.io/github/rstoenescu/gulp-pipes/badges/code.svg" alt="bitHound Code"></a>
 
 

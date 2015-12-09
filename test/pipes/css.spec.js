@@ -28,7 +28,7 @@ describe('CSS', function() {
     it('should not fail on error by default', function(done) {
       fileStream('body bg-color sas ajkfg;dfgd gds;d ;;;')
         .pipe(pipes.css.lint())
-        .on('error', function(err) {
+        .on('error', function() {
           throw new Error('Should not fail on error');
         })
         .pipe(assert.end(done));
