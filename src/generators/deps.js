@@ -13,6 +13,6 @@ module.exports = function(options, extension, common, min) {
       return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
     })
     .pipe(function() {
-      return common.gulp.if(options.prod, min());
+      return common.gulp.if(options.prod, min(options.minify));
     })();
 };

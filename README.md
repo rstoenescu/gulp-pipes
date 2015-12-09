@@ -162,6 +162,7 @@ return gulp.src('./some-file.js')
 | pack | Object | Webpack configuration |
 | retainPath | Boolean | makes webpack use the same *path* + *name* as source files; by default, only *name* is retained |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
+| minify | Object | UglifyJS optional configuration |
 
 |  | Development Mode | Production Mode |
 | --- | --- | --- |
@@ -210,6 +211,7 @@ gulp.task('some-task', function() {
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
+| minify | Object | UglifyJS optional configuration |
 
 |  | Development Mode | Production Mode |
 | --- | --- | --- |

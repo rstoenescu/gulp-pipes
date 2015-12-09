@@ -28,7 +28,7 @@ module.exports.compile = function(options) {
     .pipe(common.gulp.stylus, {use: [nib()]})
     .pipe(common.gulp.cssBase64, options.base64)
     .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.minifyCss());
+      return common.gulp.if(options.prod, common.gulp.minifyCss(options.minify));
     })
     .pipe(function() {
       return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
