@@ -1,6 +1,6 @@
 {
   "name": "gulp-pipes",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Opinionated reusable Gulp pipes for handling CSS, JS, HTML, image files and more",
   "main": "src/index.js",
   "files": [

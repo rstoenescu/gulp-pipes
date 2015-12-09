@@ -82,7 +82,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.contain('__webpack_require__');
-          //expect(content).to.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain('\\n//# sourceMappingURL=data:application/json;base64,');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
         }))
@@ -109,7 +109,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.not.contain('__webpack_require__');
-          expect(content).to.not.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.not.contain('\\n//# sourceMappingURL=data:application/json;base64,');
           expect(content).to.contain('!function(r){function t(e){if(o');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
@@ -145,7 +145,7 @@ describe('JS', function() {
         .pipe(pipes.js.compile())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
-          expect(d.contents.toString()).to.contain('module.exports = "<h1>view</h1>\\n"');
+          expect(d.contents.toString()).to.contain('<h1>view</h1>');
         }))
         .pipe(assert.end(done));
     });
