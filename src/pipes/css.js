@@ -28,7 +28,7 @@ module.exports.compile = function(options) {
     .pipe(common.gulp.stylus, {use: [nib()]})
     .pipe(common.gulp.cssBase64, options.base64)
     .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.minifyCss(options.minify));
+      return common.gulp.if(options.prod, common.gulp.cssnano(options.minify));
     })
     .pipe(function() {
       return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
@@ -38,5 +38,5 @@ module.exports.compile = function(options) {
 };
 
 module.exports.deps = function(options) {
-  return require('../generators/deps')(options, '.css', common, common.gulp.minifyCss);
+  return require('../generators/deps')(options, '.css', common, common.gulp.cssnano);
 };
