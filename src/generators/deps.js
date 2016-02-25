@@ -3,16 +3,17 @@
 module.exports = function(options, extension, common, min) {
   options = options || {};
   options.name = (options.name || 'dependencies') + (options.prod && options.extmin ? '.min' : '') + extension;
+  var production = !!options.prod;
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init({loadMaps: true}));
+      return production ? common.noop() : common.gulp.sourcemaps.init({loadMaps: true});
     })
     .pipe(common.gulp.concat, options.name)
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
+      return production ? common.noop() : common.gulp.sourcemaps.write();
     })
     .pipe(function() {
-      return common.gulp.if(options.prod, min(options.minify));
+      return production ? min(options.minify) : common.noop();
     })();
 };

@@ -52,10 +52,10 @@ describe('HTML', function() {
         }))
         .pipe(assert.length(2))
         .pipe(assert.first(function(d) {
-          expect(d.contents.toString()).to.equal('<!DOCTYPE html><html><head><title>Title</title><body>One');
+          expect(d.contents.toString()).to.equal('<!DOCTYPE html><title>Title</title>One');
         }))
         .pipe(assert.second(function(d) {
-          expect(d.contents.toString()).to.equal('<html><body><p>Two</p>');
+          expect(d.contents.toString()).to.equal('<p>Two');
         }))
         .pipe(assert.end(done));
     });

@@ -14,26 +14,27 @@ module.exports.lint = function(options) {
     reporter: common.gulp.stylint.reporter,
     fail: options.fail,
     failer: common.gulp.stylint.reporter
-  });
+  }, common);
 };
 
 module.exports.compile = function(options) {
   options = options || {};
   options.base64 = options.base64 || {};
+  var production = !!options.prod;
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.init({loadMaps: true}));
+      return production ? common.noop() : common.gulp.sourcemaps.init({loadMaps: true});
     })
     .pipe(common.gulp.stylus, {use: [nib()]})
     .pipe(common.gulp.cssBase64, options.base64)
     .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.cssnano(options.minify));
+      return production ? common.gulp.cssnano(options.minify) : common.noop();
     })
     .pipe(function() {
-      return common.gulp.if(!options.prod, common.gulp.sourcemaps.write());
+      return production ? common.noop() : common.gulp.sourcemaps.write();
     }).pipe(function() {
-      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min.css'}));
+      return production && options.extmin ? common.gulp.rename({extname: '.min.css'}) : common.noop();
     })();
 };
 

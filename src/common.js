@@ -4,5 +4,5 @@ module.exports = {
   lazypipe: require('lazypipe'),
   merge: require('merge'),
   getRoot: require('find-root'),
-  PluginError: require('gulp-util').PluginError
+  noop: require('through2').obj
 };

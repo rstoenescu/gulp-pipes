@@ -16,7 +16,7 @@ module.exports = function(options) {
     /*eslint-enable */
   }
   else if (!fs.existsSync(options.templatePath)) {
-    throw new common.PluginError('gulp-pipes', 'Template file does not exists at ' + options.templatePath);
+    throw new Error('gulp-pipes: Template file does not exists at ' + options.templatePath);
   }
 
   var banner = fs.readFileSync(options.templatePath, 'utf8');

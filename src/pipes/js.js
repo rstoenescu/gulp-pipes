@@ -23,31 +23,33 @@ module.exports.lint = function(options) {
     reporter: common.gulp.eslint.format,
     fail: options.fail,
     failer: common.gulp.eslint.failAfterError
-  });
+  }, common);
 };
 
 module.exports.compile = function(options) {
   options = options || {};
-
-  var config = common.merge(
-    true,
-    options.prod ? defaultWebpack.prod : defaultWebpack.dev,
-    options.pack
-  );
+  var
+    retainPath = !!options.retainPath,
+    production = !!options.prod,
+    config = common.merge(
+      true,
+      options.prod ? defaultWebpack.prod : defaultWebpack.dev,
+      options.pack
+    );
 
   return common.lazypipe()
     .pipe(function() {
-      return common.gulp.if(!options.retainPath, withName());
+      return retainPath ? common.noop() : withName();
     })
     .pipe(function() {
-      return common.gulp.if(options.retainPath, withPath());
+      return retainPath ? withPath() : common.noop();
     })
     .pipe(webpack, config)
     .pipe(function() {
-      return common.gulp.if(options.prod, common.gulp.uglify(options.minify));
+      return production ? common.gulp.uglify(options.minify) : common.noop();
     })
     .pipe(function() {
-      return common.gulp.if(options.prod && options.extmin, common.gulp.rename({extname: '.min.js'}));
+      return production && !!options.extmin ? common.gulp.rename({extname: '.min.js'}) : common.noop();
     })();
 };
 

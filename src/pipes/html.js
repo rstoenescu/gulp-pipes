@@ -31,9 +31,6 @@ module.exports.compile = function(options) {
   return common.lazypipe()
     .pipe(common.gulp.fileInclude, includeConfig)
     .pipe(function() {
-      return common.gulp.if(
-        options.prod,
-        common.gulp.htmlmin(minifierConfig)
-      );
+      return !!options.prod ? common.gulp.htmlmin(minifierConfig) : common.noop();
     })();
 };
