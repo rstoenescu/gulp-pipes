@@ -64,6 +64,23 @@ describe('CSS', function() {
         .pipe(assert.end(done));
     });
 
+    it('should be able to dev-compile without maps', function(done) {
+      fileStream(precompFile)
+        .pipe(pipes.css.compile({
+          nomap: true
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var base = path.basename(d.path);
+          var compiled = 'body {\n  background-color: #fff;\n}\n';
+
+          expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
+          expect(base).to.endWith('.css');
+          expect(base).to.not.endWith('.min.css');
+        }))
+        .pipe(assert.end(done));
+    });
+
     it('should be able to embedd small image files', function(done) {
       fileStream('body\n  background url(' + path.join(process.cwd(), 'test/fixtures/image.gif') + ')')
         .pipe(pipes.css.compile())
