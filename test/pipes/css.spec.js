@@ -150,6 +150,21 @@ describe('CSS', function() {
         .pipe(assert.end(done));
     });
 
+    it('should be able to dev-compile without maps', function(done) {
+      fileStream(cssFile, cssFileTwo)
+        .pipe(pipes.css.deps({
+          nomap: true
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          var compiled = 'body {\n  background-color: white;\n\n } \nbody    {\n  background-color: black;\n }\n';
+
+          expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
+          expect(path.basename(d.path)).to.equal('dependencies.css');
+        }))
+        .pipe(assert.end(done));
+    });
+
     it('should be able to prod-compile', function(done) {
       fileStream(cssFile)
         .pipe(pipes.css.deps({
