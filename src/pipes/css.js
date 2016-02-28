@@ -2,7 +2,7 @@
 
 var
   common = require('../common'),
-  nib = require('nib')
+  autoprefixer = require('autoprefixer-stylus')
   ;
 
 module.exports.lint = function(options) {
@@ -20,6 +20,11 @@ module.exports.lint = function(options) {
 module.exports.compile = function(options) {
   options = options || {};
   options.base64 = options.base64 || {};
+  options.autoprefixer = options.autoprefixer || {
+    cascade: false,
+    browsers: ['last 2 versions', '> 10%']
+  };
+
   var
     production = !!options.prod,
     nomap = !!options.nomap
@@ -29,7 +34,7 @@ module.exports.compile = function(options) {
     .pipe(function() {
       return production || nomap ? common.noop() : common.gulp.sourcemaps.init({loadMaps: true});
     })
-    .pipe(common.gulp.stylus, {use: [nib()]})
+    .pipe(common.gulp.stylus, {use: [autoprefixer(options.autoprefixer)]})
     .pipe(common.gulp.cssBase64, options.base64)
     .pipe(function() {
       return production ? common.gulp.cssnano(options.minify) : common.noop();

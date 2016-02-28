@@ -102,12 +102,21 @@ return gulp.src('./some-file.js')
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
 | base64 | Object | [gulp-css-base64](https://www.npmjs.com/package/gulp-css-base64) options |
+| autoprefixer | Object | [autoprefixer](https://github.com/postcss/autoprefixer#options) options |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
 | nomap | Boolean | (Dev compile only; default: *true*) Does not adds source maps |
 
+`autoprefixer` uses this default configuration (which is overriden when specifying property in pipes.css.compile()):
+```js
+{
+  cascade: false,
+  browsers: ['last 2 versions', '> 10%']
+}
+```
+
 |  | Development Mode | Production Mode |
 | --- | --- | --- |
-| Compile Stylus files with [NIB](http://tj.github.io/nib/) | * | * |
+| Compile Stylus | * | * |
 | Auto prefixes properties for cross-browser compatibility | * | * |
 | Auto embeds small images with base64 encoding | * | * |
 | Adds sourcemaps (unless nomap = true) | * |  |
