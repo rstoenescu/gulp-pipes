@@ -4,7 +4,8 @@ var
   common = require('../common'),
   withName = require('vinyl-named'),
   withPath = require('vinyl-named-with-path'),
-  webpack = require('webpack-stream')
+  webpack = require('webpack-stream'),
+  originalWebpack = require('webpack')
   ;
 
 var defaultWebpack = {
@@ -28,6 +29,16 @@ module.exports.lint = function(options) {
 
 module.exports.compile = function(options) {
   options = options || {};
+
+  if (options.define) {
+    options.pack = options.pack || {};
+    options.pack.plugins = options.pack.plugins || [];
+
+    options.pack.plugins.push(
+      new originalWebpack.DefinePlugin(options.define)
+    );
+  }
+
   var
     retainPath = !!options.retainPath,
     production = !!options.prod,

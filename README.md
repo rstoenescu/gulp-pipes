@@ -170,9 +170,17 @@ return gulp.src('./some-file.js')
 | --- | --- | --- |
 | prod | Boolean | Compile for production |
 | pack | Object | Webpack configuration |
-| retainPath | Boolean | makes webpack use the same *path* + *name* as source files; by default, only *name* is retained |
+| define | Object | Object containing all properties which will be supplied to webpack.DefinePlugin; see example below |
+| retainPath | Boolean | makes Webpack use the same *path* + *name* as source files; by default, only *name* is retained |
 | extmin | Boolean | Adds '.min' to extension (use in conjunction with `prod` only) |
 | minify | Object | UglifyJS optional configuration |
+
+Example for `define`. Please note `JSON.stringify()` is **required**.
+``` js
+define = {
+  VERSION: JSON.stringify('1.0.1');
+}
+```
 
 |  | Development Mode | Production Mode |
 | --- | --- | --- |
@@ -199,7 +207,7 @@ var content = '<html></html>';
 
 ``` js
 gulp.task('some-task', function() {
-  return gulp.src('path/to/script.js', {base: 'path'})
+  return gulp.src('path/to/script.js', {base: '/path'})
     .pipe(pipes.js.compile({
       retainPath: true
     }))

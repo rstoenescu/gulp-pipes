@@ -11,7 +11,8 @@ describe('JS', function() {
     jsFile    = 'var a = \'one\';',
     jsFileTwo = 'var a = \'two\';',
     filePath = 'test/fixtures/test_1.js',
-    filePathTwo = 'test/fixtures/test_2.js'
+    filePathTwo = 'test/fixtures/test_2.js',
+    filePathThree = 'test/fixtures/define_plugin.js'
     ;
 
   function testMinifyOptions(type, done) {
@@ -82,7 +83,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.contain('__webpack_require__');
-          expect(content).to.contain('\\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.contain('\\n//# sourceMappingURL=');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
         }))
@@ -109,7 +110,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.not.contain('__webpack_require__');
-          expect(content).to.not.contain('\\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.not.contain('\\n//# sourceMappingURL=');
           expect(content).to.contain('!function(r){function t(e){if(o');
           expect(base).to.endWith('.js');
           expect(base).to.not.endWith('.min.js');
@@ -129,7 +130,7 @@ describe('JS', function() {
           var base = path.basename(d.path);
 
           expect(content).to.not.contain('__webpack_require__');
-          expect(content).to.not.contain('\n//# sourceMappingURL=data:application/json;base64,');
+          expect(content).to.not.contain('\n//# sourceMappingURL=');
           expect(content).to.contain('!function(r){function t(e){if(o');
           expect(base).to.endWith('.min.js');
         }))
@@ -154,6 +155,20 @@ describe('JS', function() {
       testMinifyOptions('compile', done);
     });
 
+    it('should be able to inject webpack.DefinePlugin', function(done) {
+      gulp.src('test/fixtures/define_plugin.js')
+        .pipe(pipes.js.compile({
+          define: {
+            VERSION: JSON.stringify('1.0.1')
+          }
+        }))
+        .pipe(assert.length(1))
+        .pipe(assert.first(function(d) {
+          expect(d.contents.toString()).to.contain('1.0.1');
+        }))
+        .pipe(assert.end(done));
+    });
+
   });
 
   describe('deps', function() {
@@ -163,7 +178,7 @@ describe('JS', function() {
         .pipe(pipes.js.deps())
         .pipe(assert.length(1))
         .pipe(assert.first(function(d) {
-          var compiled = 'var a = \'one\';\nvar a = \'two\';\n//# sourceMappingURL=data:application/json;base6';
+          var compiled = 'var a = \'one\';\nvar a = \'two\';\n//# sourceMappingURL=';
 
           expect(d.contents.toString().substr(0, compiled.length)).to.equal(compiled);
           expect(path.basename(d.path)).to.equal('dependencies.js');
