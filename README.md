@@ -219,6 +219,7 @@ gulp.task('some-task', function() {
 
 > Webpack configuration supplied gets merged with a default one which adds sourcemaps on development mode
 
+You can access Webpack directly through `pipes.js.webpack`. For example: `pipes.js.webpack.DefinePlugin`.
 
 
 ### Dependencies Compiler

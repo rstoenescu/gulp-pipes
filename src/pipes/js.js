@@ -27,6 +27,8 @@ module.exports.lint = function(options) {
   }, common);
 };
 
+module.exports.webpack = webpack;
+
 module.exports.compile = function(options) {
   options = options || {};
 
